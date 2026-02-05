@@ -18,19 +18,6 @@ body{
   margin:0;
 }
 
-/* subtle white-peony vibe in background */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    radial-gradient(circle at 25% 30%, rgba(255,255,255,.6) 2px, transparent 2px),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,.6) 2px, transparent 2px);
-  background-size:120px 120px;
-  opacity:.32;
-  pointer-events:none;
-}
-
 .card{
   max-width:720px;
   background:white;
@@ -53,17 +40,35 @@ button{
   background:#ff3b7a;
   color:white;
   font-weight:bold;
+  cursor:pointer;
 }
 
 .button-zone{
   position:relative;
-  height:140px;
+  height:160px;
 }
 
-#yesBtn{ position:absolute; left:20%; }
-#noBtn{ position:absolute; left:60%; background:#eee; color:black; }
+#yesBtn{
+  position:absolute;
+  left:20%;
+  transform:translateY(-50%);
+}
+
+#noBtn{
+  position:absolute;
+  left:60%;
+  background:#eee;
+  color:black;
+  transform:translateY(-50%);
+}
 
 .hidden{ display:none; }
+
+.message{
+  margin-top:10px;
+  opacity:.8;
+  font-size:14px;
+}
 </style>
 </head>
 
@@ -71,10 +76,32 @@ button{
 
 <main class="card">
 
-<!-- POEM FIRST -->
-<section id="poemSection">
+<!-- ===== STAGE 1 – FAKE SCREEN ===== -->
+<section id="fakeSection">
 
-<h1>Natasha, it's been 595 Days from the day we met 🤍🌸</h1>
+<h2>Hey you 👀</h2>
+
+<p>
+How’re you?  
+Why did you click this link?  
+There’s literally nothing to see here.
+</p>
+
+<p>Still reading? Damn, curiosity level 100.</p>
+
+<div class="button-zone" id="fakeZone">
+  <button id="fakeContinue">Continue</button>
+</div>
+
+<div class="message" id="fakeMsg"></div>
+
+</section>
+
+
+<!-- ===== STAGE 2 – POEM ===== -->
+<section id="poemSection" class="hidden">
+
+<h1>Happy Valentine's Babe 🤍🌸</h1>
 
 <div class="poem">
 For 595 days,
@@ -100,12 +127,25 @@ call it Damon’s promise
 I’ll always choose you.
 </div>
 
-<button onclick="showQuestion()">Continue...</button>
+<button onclick="showReveal()">Continue...</button>
 
 </section>
 
 
-<!-- QUESTION -->
+<!-- ===== STAGE 3 – BIG REVEAL ===== -->
+<section id="revealSection" class="hidden">
+
+<h2>Time for a big reveal…</h2>
+
+<p>You’ve come this far,  
+no turning back now.</p>
+
+<button onclick="showQuestion()">I’m ready</button>
+
+</section>
+
+
+<!-- ===== STAGE 4 – QUESTION GAME ===== -->
 <section id="questionSection" class="hidden">
 
 <h1>Natasha, will you be my Valentine? ❤️</h1>
@@ -118,7 +158,7 @@ I’ll always choose you.
 </section>
 
 
-<!-- AFTER YES -->
+<!-- ===== FINAL ===== -->
 <section id="afterYes" class="hidden">
 <h2>You just made my year 💘</h2>
 </section>
@@ -127,86 +167,149 @@ I’ll always choose you.
 
 
 <script>
-function showQuestion(){
- document.getElementById("poemSection").classList.add("hidden");
- document.getElementById("questionSection").classList.remove("hidden");
+// ===== STAGE 1 – FAKE CONTINUE TROLL =====
+let fakeClicks = 0;
+const fakeBtn = document.getElementById("fakeContinue");
+const fakeMsg = document.getElementById("fakeMsg");
+
+const fakeTexts = [
+ "Nah not yet 😌",
+ "Where are you rushing?",
+ "Patience is attractive you know",
+ "Okay okay… fine 💀"
+];
+
+fakeBtn.addEventListener("click",()=>{
+
+ if(fakeClicks < 3){
+   fakeMsg.innerText = fakeTexts[fakeClicks];
+
+   const randX = Math.random()*300 - 150;
+   const randY = Math.random()*100 - 50;
+
+   fakeBtn.style.position="absolute";
+   fakeBtn.style.left=`calc(50% + ${randX}px)`;
+   fakeBtn.style.top=`calc(50% + ${randY}px)`;
+
+   fakeClicks++;
+   return;
+ }
+
+ // finally allow
+ document.getElementById("fakeSection").style.display="none";
+ document.getElementById("poemSection").style.display="block";
+});
+
+
+// ===== NAVIGATION =====
+function showReveal(){
+ document.getElementById("poemSection").style.display="none";
+ document.getElementById("revealSection").style.display="block";
 }
 
+function showQuestion(){
+ document.getElementById("revealSection").style.display="none";
+ document.getElementById("questionSection").style.display="block";
+}
+
+
+// ===== ORIGINAL GAME LOGIC =====
 const yesBtn=document.getElementById("yesBtn");
 const noBtn=document.getElementById("noBtn");
 const zone=document.getElementById("zone");
 
-function moveNo(x,y){
+let yesScale = 1;
+
+function growYes(){
+ yesScale = Math.min(2.6, yesScale + 0.16);
+ yesBtn.style.transform = `translateY(-50%) scale(${yesScale})`;
+}
+
+function clamp(n,min,max){
+ return Math.max(min, Math.min(max,n));
+}
+
+function moveNo(px,py){
  const z=zone.getBoundingClientRect();
  const b=noBtn.getBoundingClientRect();
 
- let dx=(b.left+b.width/2)-x;
- let dy=(b.top+b.height/2)-y;
+ let dx=(b.left+b.width/2)-px;
+ let dy=(b.top+b.height/2)-py;
 
- let d=Math.hypot(dx,dy)||1;
- dx/=d; dy/=d;
+ let mag=Math.hypot(dx,dy)||1;
+ dx/=mag; dy/=mag;
 
- let nl=(b.left-z.left)+dx*120;
- let nt=(b.top-z.top)+dy*120;
+ let newLeft=(b.left-z.left)+dx*160;
+ let newTop=(b.top-z.top)+dy*160;
 
- noBtn.style.left=Math.max(0,Math.min(z.width-b.width,nl))+"px";
- noBtn.style.top=Math.max(0,Math.min(z.height-b.height,nt))+"px";
+ newLeft=clamp(newLeft,0,z.width-b.width);
+ newTop=clamp(newTop,0,z.height-b.height);
+
+ noBtn.style.left=newLeft+"px";
+ noBtn.style.top=newTop+"px";
+
+ growYes();
 }
 
 zone.addEventListener("pointermove",e=>{
  const b=noBtn.getBoundingClientRect();
- const dist=Math.hypot(
-   b.left+b.width/2-e.clientX,
-   b.top+b.height/2-e.clientY
+ const d=Math.hypot(
+   (b.left+b.width/2)-e.clientX,
+   (b.top+b.height/2)-e.clientY
  );
- if(dist<120) moveNo(e.clientX,e.clientY);
+ if(d<150) moveNo(e.clientX,e.clientY);
 });
 
+noBtn.addEventListener("click",e=>e.preventDefault());
 
-// 🌸 CONFETTI + PEONIES
+
+// ===== BIG PEONY CONFETTI =====
 function peonyRain(){
 
-  // base confetti
-  confetti({
-    particleCount:120,
-    spread:110,
-    colors:['#ffd6e7','#ffffff','#ffb7c5']
-  });
+ confetti({
+   particleCount:240,
+   spread:150,
+   scalar:2.0,
+   gravity:0.55,
+   colors:['#ffffff','#ffe6f0','#ffd6e7','#fff5fa']
+ });
 
-  // petal effect
-  const end = Date.now() + 1800;
+ const end = Date.now() + 3200;
 
-  (function frame(){
-    confetti({
-      particleCount:6,
-      angle:60,
-      spread:55,
-      origin:{x:0},
-      shapes:["circle"],
-      colors:["#ffffff","#ffe6f0","#fff5fa"]
-    });
+ (function frame(){
+   confetti({
+     particleCount:16,
+     angle:60,
+     spread:70,
+     origin:{x:0},
+     scalar:1.8,
+     gravity:0.5,
+     colors:["#ffffff","#ffe6f0","#fff5fa"]
+   });
 
-    confetti({
-      particleCount:6,
-      angle:120,
-      spread:55,
-      origin:{x:1},
-      shapes:["circle"],
-      colors:["#ffffff","#ffe6f0","#fff5fa"]
-    });
+   confetti({
+     particleCount:16,
+     angle:120,
+     spread:70,
+     origin:{x:1},
+     scalar:1.8,
+     gravity:0.5,
+     colors:["#ffffff","#ffe6f0","#fff5fa"]
+   });
 
-    if(Date.now() < end){
-      requestAnimationFrame(frame);
-    }
-  })();
+   if(Date.now() < end){
+     requestAnimationFrame(frame);
+   }
+ })();
 }
 
 
+// ===== FINAL YES =====
 yesBtn.addEventListener("click",()=>{
- document.getElementById("questionSection").classList.add("hidden");
- document.getElementById("afterYes").classList.remove("hidden");
+ document.getElementById("questionSection").style.display="none";
+ document.getElementById("afterYes").style.display="block";
 
- peonyRain();   // 🌸 magic moment
+ peonyRain();
 });
 </script>
 
