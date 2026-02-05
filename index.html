@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; min-height: 15.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;title&gt;For Natasha&lt;/title&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">body {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background:#ffeef6;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-family:system-ui;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>display:grid;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>place-items:center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>min-height:100vh;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.card{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>max-width:720px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background:white;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding:24px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius:20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text-align:center;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.poem{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>white-space:pre-line;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-style:italic;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>margin:20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>line-height:1.7;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.button-zone{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position:relative;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>height:140px;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">button{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>padding:12px 22px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border:none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>border-radius:999px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background:#ff3b7a;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color:white;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>font-weight:bold;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">#noBtn{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position:absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left:60%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>background:#eee;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color:black;</p>
+<p class="p1">}</p>
+<p class="p1">#yesBtn{</p>
+<p class="p1"><span class="Apple-converted-space">  </span>position:absolute;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>left:20%;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">.result{display:none;}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;main class="card"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- POEM FIRST --&gt;</p>
+<p class="p1">&lt;section id="poemSection"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h1&gt;595 Days 🌷&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="poem"&gt;</p>
+<p class="p1">For 595 days,</p>
+<p class="p1">love hasn’t been perfect</p>
+<p class="p1">it’s been real.</p>
+<p class="p2"><br></p>
+<p class="p1">I was imperfect,</p>
+<p class="p1">still learning what love even meant,</p>
+<p class="p1">and you stayed patient</p>
+<p class="p1">while I learned how to be better.</p>
+<p class="p2"><br></p>
+<p class="p1">You made me human in ways I didn’t know I needed</p>
+<p class="p1">and I loved you with the kind of devotion</p>
+<p class="p1">that never stops choosing.</p>
+<p class="p2"><br></p>
+<p class="p1">We fought, we healed, we grew,</p>
+<p class="p1">and always found our way back.</p>
+<p class="p1">Time shaped us gently,</p>
+<p class="p1">and made us whole in ways we never expected.</p>
+<p class="p2"><br></p>
+<p class="p1">Call it Elena’s faith,</p>
+<p class="p1">call it Damon’s promise</p>
+<p class="p1">I’ll always choose you.</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;button onclick="showQuestion()"&gt;Continue...&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- QUESTION AFTER CLICK --&gt;</p>
+<p class="p1">&lt;section id="questionSection" style="display:none;"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h1&gt;Natasha, will you be my Valentine? ❤️&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="button-zone" id="zone"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button id="yesBtn"&gt;Yes&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button id="noBtn"&gt;No&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="hint"&gt;“No” seems a bit shy 😈&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">&lt;section id="result" class="result"&gt;</p>
+<p class="p1">&lt;h2&gt;YAY! 🎉&lt;/h2&gt;</p>
+<p class="p1">&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">function showQuestion(){</p>
+<p class="p1"><span class="Apple-converted-space"> </span>document.getElementById("poemSection").style.display="none";</p>
+<p class="p1"><span class="Apple-converted-space"> </span>document.getElementById("questionSection").style.display="block";</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const yesBtn=document.getElementById("yesBtn");</p>
+<p class="p1">const noBtn=document.getElementById("noBtn");</p>
+<p class="p1">const zone=document.getElementById("zone");</p>
+<p class="p1">const result=document.getElementById("result");</p>
+<p class="p2"><br></p>
+<p class="p1">let scale=1;</p>
+<p class="p2"><br></p>
+<p class="p1">function grow(){</p>
+<p class="p1"><span class="Apple-converted-space"> </span>scale+=0.1;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>yesBtn.style.transform=`scale(${scale})`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function moveNo(x,y){</p>
+<p class="p1"><span class="Apple-converted-space"> </span>const z=zone.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space"> </span>const b=noBtn.getBoundingClientRect();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>let dx=(b.left+b.width/2)-x;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>let dy=(b.top+b.height/2)-y;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>let d=Math.hypot(dx,dy)||1;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>dx/=d; dy/=d;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>let nl=(b.left-z.left)+dx*120;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>let nt=(b.top-z.top)+dy*120;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>noBtn.style.left=Math.max(0,Math.min(z.width-b.width,nl))+"px";</p>
+<p class="p1"><span class="Apple-converted-space"> </span>noBtn.style.top=Math.max(0,Math.min(z.height-b.height,nt))+"px";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>grow();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">zone.addEventListener("pointermove",e=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space"> </span>const b=noBtn.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space"> </span>const dist=Math.hypot(</p>
+<p class="p1"><span class="Apple-converted-space">   </span>b.left+b.width/2-e.clientX,</p>
+<p class="p1"><span class="Apple-converted-space">   </span>b.top+b.height/2-e.clientY</p>
+<p class="p1"><span class="Apple-converted-space"> </span>);</p>
+<p class="p1"><span class="Apple-converted-space"> </span>if(dist&lt;120) moveNo(e.clientX,e.clientY);</p>
+<p class="p1">});</p>
+<p class="p2"><br></p>
+<p class="p1">yesBtn.addEventListener("click",()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space"> </span>zone.style.display="none";</p>
+<p class="p1"><span class="Apple-converted-space"> </span>result.style.display="block";</p>
+<p class="p1"><span class="Apple-converted-space"> </span>confetti();</p>
+<p class="p1">});</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
