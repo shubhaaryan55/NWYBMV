@@ -10,97 +10,73 @@
 
 <style>
 body{
-  background:#fdfdfd;
-  font-family:system-ui, -apple-system;
+  background:#fff0f6;
+  font-family:system-ui;
   display:grid;
   place-items:center;
   min-height:100vh;
   margin:0;
 }
 
-/* subtle peony wallpaper vibe */
+/* subtle white-peony vibe in background */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:url('https://i.imgur.com/3s9Peony.png'); /* soft peony texture */
-  opacity:.08;
+  background-image:
+    radial-gradient(circle at 25% 30%, rgba(255,255,255,.6) 2px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,.6) 2px, transparent 2px);
+  background-size:120px 120px;
+  opacity:.32;
   pointer-events:none;
 }
 
 .card{
-  max-width:760px;
-  background:#ffffffee;
-  padding:28px;
-  border-radius:24px;
+  max-width:720px;
+  background:white;
+  padding:24px;
+  border-radius:20px;
   text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,.08);
-  backdrop-filter:blur(6px);
 }
 
 .poem{
   white-space:pre-line;
   font-style:italic;
-  margin:22px 0;
-  line-height:1.9;
-  font-size:17px;
+  margin:20px 0;
+  line-height:1.8;
 }
 
 button{
   padding:12px 22px;
   border:none;
   border-radius:999px;
-  background:#d6336c;
+  background:#ff3b7a;
   color:white;
   font-weight:bold;
-  cursor:pointer;
-  letter-spacing:.3px;
 }
 
 .button-zone{
   position:relative;
-  height:150px;
+  height:140px;
 }
 
 #yesBtn{ position:absolute; left:20%; }
-#noBtn{ position:absolute; left:60%; background:#f1f3f5; color:black; }
-
-.hint{ font-size:13px; opacity:.7; margin-top:10px; }
+#noBtn{ position:absolute; left:60%; background:#eee; color:black; }
 
 .hidden{ display:none; }
-
-.fade{ animation:fade .7s ease; }
-
-@keyframes fade{
- from{opacity:0; transform:translateY(10px);}
- to{opacity:1; transform:translateY(0);}
-}
-
-.peony{
-  font-size:26px;
-  margin-bottom:6px;
-  opacity:.9;
-}
 </style>
 </head>
 
 <body>
 
-<!-- Mac DeMarco -->
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/07/audio_mac_demo.mp3" type="audio/mpeg">
-</audio>
-
 <main class="card">
 
-<!-- ===== POEM FIRST ===== -->
-<section id="poemSection" class="fade">
+<!-- POEM FIRST -->
+<section id="poemSection">
 
-<div class="peony">🤍🌸🤍</div>
+<h1>Natasha, it's been 595 Days from the day we met 🤍🌸</h1>
 
-<h1>595 days</h1>
-
-<div class="poem" id="poemText">
+<div class="poem">
 For 595 days,
 love hasn’t been perfect
 it’s been real.
@@ -129,91 +105,36 @@ I’ll always choose you.
 </section>
 
 
-<!-- ===== QUESTION ===== -->
-<section id="questionSection" class="hidden fade">
+<!-- QUESTION -->
+<section id="questionSection" class="hidden">
 
-<div class="peony">🌸🤍🌸</div>
-
-<h1>Natasha, will you be my Valentine?</h1>
+<h1>Natasha, will you be my Valentine? ❤️</h1>
 
 <div class="button-zone" id="zone">
   <button id="yesBtn">Yes</button>
   <button id="noBtn">No</button>
 </div>
 
-<div class="hint" id="hint">“No” seems a bit shy 😈</div>
-
 </section>
 
 
-<!-- ===== AFTER YES ===== -->
-<section id="afterYes" class="hidden fade">
-
-<div class="peony">🤍🌸🤍</div>
-
-<h2>You just made my year</h2>
-
-<ul style="text-align:left;max-width:520px;margin:auto;">
-<li>Your laugh that fixes my worst days</li>
-<li>How you believed in me before I did</li>
-<li>Our chaos that somehow feels like peace</li>
-<li>595 days and still my favorite person</li>
-<li>Because home started sounding like your name</li>
-</ul>
-
-<p style="margin-top:16px;">
-Date confirmed: You + Me + bad decisions 😌
-</p>
-
+<!-- AFTER YES -->
+<section id="afterYes" class="hidden">
+<h2>You just made my year 💘</h2>
 </section>
 
 </main>
 
 
 <script>
-// ===== TYPE EFFECT =====
-function typePoem(){
- const el=document.getElementById("poemText");
- const text=el.innerText;
- el.innerText="";
- let i=0;
-
- function type(){
-   if(i<text.length){
-     el.innerText+=text.charAt(i);
-     i++;
-     setTimeout(type,34);
-   }
- }
- type();
-}
-
-window.onload=typePoem;
-
-
-// ===== FLOW + MUSIC =====
 function showQuestion(){
  document.getElementById("poemSection").classList.add("hidden");
  document.getElementById("questionSection").classList.remove("hidden");
-
- // start Mac DeMarco softly
- const song=document.getElementById("bgm");
- song.volume=0.35;
- song.play();
 }
 
-
-// ===== BUTTON GAME =====
 const yesBtn=document.getElementById("yesBtn");
 const noBtn=document.getElementById("noBtn");
 const zone=document.getElementById("zone");
-
-let scale=1;
-
-function grow(){
- scale+=0.1;
- yesBtn.style.transform=`scale(${scale})`;
-}
 
 function moveNo(x,y){
  const z=zone.getBoundingClientRect();
@@ -225,13 +146,11 @@ function moveNo(x,y){
  let d=Math.hypot(dx,dy)||1;
  dx/=d; dy/=d;
 
- let nl=(b.left-z.left)+dx*130;
- let nt=(b.top-z.top)+dy*130;
+ let nl=(b.left-z.left)+dx*120;
+ let nt=(b.top-z.top)+dy*120;
 
  noBtn.style.left=Math.max(0,Math.min(z.width-b.width,nl))+"px";
  noBtn.style.top=Math.max(0,Math.min(z.height-b.height,nt))+"px";
-
- grow();
 }
 
 zone.addEventListener("pointermove",e=>{
@@ -244,11 +163,50 @@ zone.addEventListener("pointermove",e=>{
 });
 
 
-// ===== YES CLICK =====
+// 🌸 CONFETTI + PEONIES
+function peonyRain(){
+
+  // base confetti
+  confetti({
+    particleCount:120,
+    spread:110,
+    colors:['#ffd6e7','#ffffff','#ffb7c5']
+  });
+
+  // petal effect
+  const end = Date.now() + 1800;
+
+  (function frame(){
+    confetti({
+      particleCount:6,
+      angle:60,
+      spread:55,
+      origin:{x:0},
+      shapes:["circle"],
+      colors:["#ffffff","#ffe6f0","#fff5fa"]
+    });
+
+    confetti({
+      particleCount:6,
+      angle:120,
+      spread:55,
+      origin:{x:1},
+      shapes:["circle"],
+      colors:["#ffffff","#ffe6f0","#fff5fa"]
+    });
+
+    if(Date.now() < end){
+      requestAnimationFrame(frame);
+    }
+  })();
+}
+
+
 yesBtn.addEventListener("click",()=>{
  document.getElementById("questionSection").classList.add("hidden");
  document.getElementById("afterYes").classList.remove("hidden");
- confetti({particleCount:220,spread:120});
+
+ peonyRain();   // 🌸 magic moment
 });
 </script>
 
